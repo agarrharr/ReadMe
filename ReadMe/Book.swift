@@ -5,12 +5,24 @@
 //  Created by Adam Garrett-Harris on 4/19/21.
 //
 
+import SwiftUI
+
 struct Book {
     let title: String
-    let author: String
+    let links: [BookLink]
     
-    init(title: String = "Title", author: String = "Author") {
+    init(title: String = "Title", links: [BookLink] = []) {
         self.title = title
-        self.author = author
+        self.links = links
+    }
+}
+
+struct BookLink {
+    let icon: String
+    let url: String
+    
+    init(icon: String = "link", url: String = "") {
+        self.icon = icon
+        self.url = url
     }
 }
