@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject private var model = BookModel()
+    @State var selectedIndex: Int = -1
     
     let book1 = Book(title: "The Path of Daggers", links:
                         [
@@ -28,8 +28,32 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            BookView(book: book1, index: 0, isShowingButtons: (0 == model.selectedIndex))
-            BookView(book: book2, index: 1, isShowingButtons: (1 == model.selectedIndex))
+            BookView(book: book1, isSelected: Binding<Bool>(
+                        get: {
+                            self.selectedIndex == 0
+                            
+                        },
+                        set: {  newValue in
+                            self.selectedIndex = -1
+                
+                        }
+            ))
+                .onTapGesture {
+                    selectedIndex = 0
+                }
+            BookView(book: book2,  isSelected: Binding<Bool>(
+                get: {
+                    self.selectedIndex == 1
+                    
+                },
+                set: {  newValue in
+                    self.selectedIndex = -1
+        
+                }
+    ))
+                .onTapGesture {
+                    selectedIndex = 1
+                }
         }
     }
 }

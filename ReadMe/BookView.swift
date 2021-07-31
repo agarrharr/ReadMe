@@ -9,10 +9,7 @@ import SwiftUI
 
 struct BookView: View {
     @State var book: Book
-    @State var index: Int
-    @State var isShowingButtons: Bool
-    
-    @ObservedObject private var model = BookModel()
+    @Binding var isSelected: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -24,10 +21,7 @@ struct BookView: View {
             .padding(.horizontal)
             .frame(height: 100)
             .background(Color("LightBackground"))
-            .onTapGesture {
-                model.selectedIndex = index
-            }
-            if(isShowingButtons) {
+            if(isSelected) {
                 HStack() {
                     Spacer()
                     ForEach(book.links, id: \.url) { link in
@@ -44,22 +38,33 @@ struct BookView: View {
                 .background(Color("Background"))
             }
         }
+        .animation(.easeInOut)
     }
 }
 
 struct BookView_Previews: PreviewProvider {
-   
     static var previews: some View {
-        let book = Book(title: "The Path of Daggers", links:
+        let book1 = Book(title: "The Path of Daggers", links:
                             [
                                 BookLink(icon: "timer", url: "shortcuts://run-shortcut?name=Start%20Reading%20Timer&input=The%20Path%20of%20Daggers"),
                              BookLink(icon: "g.square.fill", url: "https://www.goodreads.com/book/show/140974.The_Path_of_Daggers"),
                              BookLink(icon: "drop.fill", url: "obsidian://open?vault=Notes&file=001%20Literature%20Notes%2FBook%2FThe%20Path%20of%20Daggers")
-                            ]
-                        )
-        
-        BookView(book: book, index: 0, isShowingButtons: true)
+                            ])
+        let book2 = Book(title: "The Problem of Pain", links:
+                            [
+                                BookLink(icon: "timer", url: "shortcuts://run-shortcut?name=Start%20Reading%20Timer&input=The%20Problem%20of%20Pain"),
+                                BookLink(icon: "g.square.fill", url: "https://www.goodreads.com/book/show/13650513-the-problem-of-pain"),
+                                BookLink(icon: "drop.fill", url: "obsidian://open?vault=Notes&file=001%20Literature%20Notes%2FBook%2FThe%20Problem%20of%20Pain"),
+                                BookLink(icon: "rays", url: "mindnode://open?name=The%20Problem%20of%20Pain.mindnode"),
+                                BookLink(icon: "headphones", url: "https://www.orbit.fm/imprint/13"),
+                                BookLink(icon: "dot.radiowaves.left.and.right", url: "https://overcast.fm/+bjLPlPLys")
+                         ])
+        VStack {
+            BookView(book: book1, isSelected: .constant(true))
+            BookView(book: book2, isSelected: .constant(false))
+        }
             .preferredColorScheme(.dark)
-        BookView(book: book, index: 1, isShowingButtons: false)
+        
+        BookView(book: book2, isSelected: .constant(true))
     }
 }

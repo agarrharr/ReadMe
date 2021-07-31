@@ -7,6 +7,4 @@
 
 import Foundation
 
-class BookModel: ObservableObject {
-    @Published var selectedIndex: Int = 0
-}
+

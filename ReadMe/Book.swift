@@ -5,7 +5,7 @@
 //  Created by Adam Garrett-Harris on 4/19/21.
 //
 
-import SwiftUI
+import Combine
 
 struct Book {
     let title: String
