@@ -9,18 +9,26 @@ import SwiftUI
 
 struct BookView: View {
     @State var book: Book
+    @State var index: Int
     @State var isShowingButtons: Bool
     
+    @ObservedObject private var model = BookModel()
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack() {
-                Image(systemName: "book")
                 Text(book.title)
+                    .font(.headline)
                 Spacer()
             }
             .padding(.horizontal)
-            if (isShowingButtons) {
-                HStack {
+            .frame(height: 100)
+            .background(Color("LightBackground"))
+            .onTapGesture {
+                model.selectedIndex = index
+            }
+            if(isShowingButtons) {
+                HStack() {
                     Spacer()
                     ForEach(book.links, id: \.url) { link in
                         Image(systemName: link.icon)
@@ -32,8 +40,8 @@ struct BookView: View {
                         Spacer()
                     }
                 }
-                .padding(.vertical)
-                .background(Color.orange)
+                .frame(height: 70)
+                .background(Color("Background"))
             }
         }
     }
@@ -50,7 +58,8 @@ struct BookView_Previews: PreviewProvider {
                             ]
                         )
         
-        BookView(book: book, isShowingButtons: true)
-        BookView(book: book, isShowingButtons: false)
+        BookView(book: book, index: 0, isShowingButtons: true)
+            .preferredColorScheme(.dark)
+        BookView(book: book, index: 1, isShowingButtons: false)
     }
 }

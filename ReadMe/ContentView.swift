@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var activeBook: Int = -1
+    @ObservedObject private var model = BookModel()
     
     let book1 = Book(title: "The Path of Daggers", links:
                         [
@@ -27,9 +27,9 @@ struct ContentView: View {
                      ])
     
     var body: some View {
-        VStack {
-            BookView(book: book1, isShowingButtons: true)
-            BookView(book: book2, isShowingButtons: true)
+        VStack(spacing: 0) {
+            BookView(book: book1, index: 0, isShowingButtons: (0 == model.selectedIndex))
+            BookView(book: book2, index: 1, isShowingButtons: (1 == model.selectedIndex))
         }
     }
 }
