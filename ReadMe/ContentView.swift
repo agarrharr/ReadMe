@@ -39,7 +39,7 @@ struct ContentView: View {
                         }
             ))
                 .onTapGesture {
-                    selectedIndex = 0
+                    selectedIndex = selectedIndex == 0 ? -1 : 0
                 }
             BookView(book: book2,  isSelected: Binding<Bool>(
                 get: {
@@ -52,7 +52,7 @@ struct ContentView: View {
                 }
     ))
                 .onTapGesture {
-                    selectedIndex = 1
+                    selectedIndex = selectedIndex == 1 ? -1 : 1
                 }
         }
     }
