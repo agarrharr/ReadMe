@@ -27,7 +27,7 @@ struct CreateLinkView: View {
                         TextField("Enter the URL", text: $url)
                     }
                     Section(header: Text("Image")) {
-                        TextField("Enter the symbolName", text: $systemName)
+                        TextField("Enter the systemName", text: $systemName)
                     }
                 }
                 .listStyle(GroupedListStyle())

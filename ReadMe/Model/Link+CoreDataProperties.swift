@@ -49,6 +49,7 @@ extension Link {
         let link = Link(context: context)
 
         link.url = url
+        link.symbolName = systemName
 
         do {
             try context.save()
