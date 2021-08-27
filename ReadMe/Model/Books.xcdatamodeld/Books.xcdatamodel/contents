@@ -2,8 +2,15 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Book" representedClassName="Book" syncable="YES">
         <attribute name="title" attributeType="String"/>
+        <relationship name="links" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Link" inverseName="book" inverseEntity="Link"/>
+    </entity>
+    <entity name="Link" representedClassName="Link" syncable="YES">
+        <attribute name="symbolName" attributeType="String" defaultValueString="link"/>
+        <attribute name="url" attributeType="String" defaultValueString=""/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="links" inverseEntity="Book"/>
     </entity>
     <elements>
-        <element name="Book" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Book" positionX="-63" positionY="-18" width="128" height="59"/>
+        <element name="Link" positionX="-54" positionY="0" width="128" height="74"/>
     </elements>
 </model>

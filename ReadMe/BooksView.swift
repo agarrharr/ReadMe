@@ -13,7 +13,14 @@ struct BooksView: View {
     var body: some View {
         List {
             ForEach(books, id: \.self) { book in
-                Text(book.title)
+                Section(header: Text(book.title)) {
+                    ForEach(book.linkArray, id: \.self) { link in
+                        HStack {
+                            Image(systemName: link.symbolName!)
+                            Text(link.url!)
+                        }
+                    }
+                }
             }
         }
     }

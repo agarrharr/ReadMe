@@ -10,6 +10,9 @@ import SwiftUI
 
 struct CreateBookView: View {
     @State var title: String = ""
+    @State var isPresentingAddLinkSheet = false
+    @State var links: [Link] = []
+    @State var newLink: Link?
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
@@ -17,23 +20,52 @@ struct CreateBookView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Form {
-                    Section {
-                        TextField("Title", text: $title)
+                List {
+                    Section(header: Text("Title")) {
+                        TextField("Enter a title", text: $title)
+                            
+                    }
+                    Section(header: Text("Links")) {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.green)
+                            Text("Add Link")
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            isPresentingAddLinkSheet = true
+                        }
+                        
                     }
                 }
+                .listStyle(GroupedListStyle())
+                .sheet(isPresented: $isPresentingAddLinkSheet, onDismiss: {
+                    // TODO: fix error if they cancel
+                    links.append(newLink!)
+                    newLink = nil
+                }, content: {
+                    CreateLinkView(link: $newLink)
+                })
                 Spacer()
             }
-            .navigationBarTitle("Add Book")
-            .navigationBarItems(trailing: Button(action: {
-                Book.createWith(title: title, using: viewContext)
-                
-                self.presentationMode.wrappedValue
-                    .dismiss()
-            }) {
-                Text("Save")
-                    .fontWeight(.bold)
-            })
+            .navigationBarItems(
+                leading: Button(action: {
+                    self.presentationMode.wrappedValue
+                        .dismiss()
+                }) {
+                    Text("Cancel")
+                        .fontWeight(.bold)
+                },
+                trailing: Button(action: {
+                    Book.createWith(title: title, links: links, in: viewContext)
+                    
+                    self.presentationMode.wrappedValue
+                        .dismiss()
+                }) {
+                    Text("Save")
+                        .fontWeight(.bold)
+                })
         }
     }
 }
