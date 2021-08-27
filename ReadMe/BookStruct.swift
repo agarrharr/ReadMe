@@ -7,7 +7,7 @@
 
 import Combine
 
-struct Book {
+struct BookStruct {
     let title: String
     let links: [BookLink]
     
