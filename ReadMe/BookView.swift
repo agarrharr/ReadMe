@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookView: View {
-    @State var book: BookStruct
+    @State var book: Book
     @Binding var isSelected: Bool
     
     var body: some View {
@@ -24,11 +24,11 @@ struct BookView: View {
             if(isSelected) {
                 HStack() {
                     Spacer()
-                    ForEach(book.links, id: \.url) { link in
-                        Image(systemName: link.icon)
+                    ForEach(book.linkArray, id: \.url) { link in
+                        Image(systemName: link.symbolName!)
                             .font(.system(size: 28, weight: .regular))
                             .onTapGesture {
-                                UIApplication.shared.open(URL(string: link.url)!)
+                                UIApplication.shared.open(URL(string: link.url!)!)
                             }
                             .foregroundColor(.white)
                         Spacer()
@@ -44,21 +44,12 @@ struct BookView: View {
 
 struct BookView_Previews: PreviewProvider {
     static var previews: some View {
-        let book1 = BookStruct(title: "The Path of Daggers", links:
-                            [
-                                BookLink(icon: "timer", url: "shortcuts://run-shortcut?name=Start%20Reading%20Timer&input=The%20Path%20of%20Daggers"),
-                             BookLink(icon: "g.square.fill", url: "https://www.goodreads.com/book/show/140974.The_Path_of_Daggers"),
-                             BookLink(icon: "drop.fill", url: "obsidian://open?vault=Notes&file=001%20Literature%20Notes%2FBook%2FThe%20Path%20of%20Daggers")
-                            ])
-        let book2 = BookStruct(title: "The Problem of Pain", links:
-                            [
-                                BookLink(icon: "timer", url: "shortcuts://run-shortcut?name=Start%20Reading%20Timer&input=The%20Problem%20of%20Pain"),
-                                BookLink(icon: "g.square.fill", url: "https://www.goodreads.com/book/show/13650513-the-problem-of-pain"),
-                                BookLink(icon: "drop.fill", url: "obsidian://open?vault=Notes&file=001%20Literature%20Notes%2FBook%2FThe%20Problem%20of%20Pain"),
-                                BookLink(icon: "rays", url: "mindnode://open?name=The%20Problem%20of%20Pain.mindnode"),
-                                BookLink(icon: "headphones", url: "https://www.orbit.fm/imprint/13"),
-                                BookLink(icon: "dot.radiowaves.left.and.right", url: "https://overcast.fm/+bjLPlPLys")
-                         ])
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let link1 = Link.createWith(url: "asdf://", systemName: "checkmark", in: context)
+        let book1 = Book.createWith(title: "Book", links: [link1], in: context)
+        let book2 = Book.createWith(title: "Book 2", links: [], in: context)
+
         VStack {
             BookView(book: book1, isSelected: .constant(true))
             BookView(book: book2, isSelected: .constant(false))
@@ -66,5 +57,6 @@ struct BookView_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
         
         BookView(book: book2, isSelected: .constant(true))
+            .environment(\.managedObjectContext, context)
     }
 }

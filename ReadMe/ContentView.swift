@@ -30,7 +30,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             BooksView()
-            
             .navigationBarTitle("Read Me")
             .navigationBarItems(trailing: HStack {
                 Button(action: { isPresentingAddBookSheet = true}) {

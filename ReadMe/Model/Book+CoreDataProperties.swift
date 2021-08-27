@@ -39,21 +39,20 @@ extension Book {
 //        }
 //    }
     
-    static func createWith(title: String, links: [Link], in context: NSManagedObjectContext) {
+    static func createWith(title: String, links: [Link], in context: NSManagedObjectContext) -> Book {
         let book = Book(context: context)
 
         book.title = title
-        print(links)
     
         book.links = NSSet(array: links)
-        print("Add links to the book")
 
         do {
-            print("Try to save")
             try context.save()
         } catch {
             fatalError("Error saving book: \(error)")
         }
+        
+        return book
     }
     
     static func basicFetchRequest() -> FetchRequest<Book> {
