@@ -20,10 +20,13 @@ struct BooksView: View {
                         HStack {
                             Image(systemName: link.symbolName ?? "link")
                             Text(link.name ?? "")
+                            Spacer()
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            UIApplication.shared.open(URL(string: link.url!)!)
+                            if let url = URL(string: link.url ?? "") {
+                                UIApplication.shared.open(url)
+                            }
                         }
                     }
                 }

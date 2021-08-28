@@ -67,7 +67,6 @@ struct CreateLinkView: View {
                                                     : Color(.clear)
                                             )
                                             .cornerRadius(8.0)
-                                            .contentShape(Rectangle())
                                             .onTapGesture {
                                                 self.systemName = systemName
                                             }
