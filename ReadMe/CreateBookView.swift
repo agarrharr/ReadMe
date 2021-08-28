@@ -13,6 +13,8 @@ struct CreateBookView: View {
     @State var isPresentingAddLinkSheet = false
     @State var links: [Link] = []
     @State var newLink: Link?
+    @State var barcode = ""
+    @State var isPresentingScanner = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
@@ -20,6 +22,10 @@ struct CreateBookView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Text(barcode)
+                Button(action: { isPresentingScanner = true}) {
+                    Text("Scan barcode")
+                }
                 List {
                     Section(header: Text("Title")) {
                         TextField("Enter a title", text: $title)
@@ -55,6 +61,9 @@ struct CreateBookView: View {
                     isPresentingAddLinkSheet = false
                 }, content: {
                     CreateLinkView(link: $newLink)
+                })
+                .sheet(isPresented: $isPresentingScanner, content: {
+                    ScannerView(barcode: $barcode)
                 })
                 Spacer()
             }

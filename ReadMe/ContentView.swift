@@ -10,20 +10,12 @@ import SwiftUI
 struct ContentView: View {
     @State var selectedIndex: Int = -1
     @State var isPresentingAddBookSheet = false
-    @State var isPresentingScanner = false
-    @State var barcode = ""
     
     var body: some View {
         NavigationView {
-            VStack {
-            Text(barcode)
             BooksView()
                 .navigationBarTitle("Read Me")
                 .navigationBarItems(
-                    leading:
-                        Button(action: { isPresentingScanner = true}) {
-                            Text("Scan barcode")
-                        },
                     trailing:
                         HStack {
                             Button(action: { isPresentingAddBookSheet = true}) {
@@ -34,10 +26,6 @@ struct ContentView: View {
                 .sheet(isPresented: $isPresentingAddBookSheet, content: {
                     CreateBookView()
                 })
-                .sheet(isPresented: $isPresentingScanner, content: {
-                    ScannerView(barcode: $barcode)
-                })
-            }
         }
     }
 }
