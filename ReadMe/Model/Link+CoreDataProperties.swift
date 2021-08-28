@@ -16,39 +16,16 @@ extension Link {
         return NSFetchRequest<Link>(entityName: "Link")
     }
 
-    @NSManaged public var symbolName: String?
     @NSManaged public var url: String?
+    @NSManaged public var name: String?
+    @NSManaged public var symbolName: String?
     @NSManaged public var book: Book?
     
-//    static func create(withURL url: String, forBook book: Book, in context: NSManagedObjectContext) {
-//        let link = Link(context: context)
-//
-//        link.url = url
-//        link.book = book
-//
-//        do {
-//            try context.save()
-//        } catch {
-//            fatalError("Unresolved error \(error)")
-//        }
-//    }
-    
-//    static func create(withURL url: String, in context: NSManagedObjectContext) {
-//        let link = Link(context: context)
-//
-//        link.url = url
-//
-//        do {
-//            try context.save()
-//        } catch {
-//            fatalError("Unresolved error \(error)")
-//        }
-//    }
-    
-    static func createWith(url: String, systemName: String, in context: NSManagedObjectContext) -> Link {
+    static func createWith(url: String, name: String, systemName: String, in context: NSManagedObjectContext) -> Link {
         let link = Link(context: context)
 
         link.url = url
+        link.name = name
         link.symbolName = systemName
 
         do {

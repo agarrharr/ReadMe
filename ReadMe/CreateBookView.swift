@@ -26,6 +26,12 @@ struct CreateBookView: View {
                             
                     }
                     Section(header: Text("Links")) {
+                        ForEach(links, id: \.self) { link in
+                            HStack {
+                                Image(systemName: link.symbolName!)
+                                Text(link.url!)
+                            }
+                        }
                         HStack {
                             Image(systemName: "plus.circle.fill")
                                 .foregroundColor(.green)
@@ -34,6 +40,7 @@ struct CreateBookView: View {
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
+                            print("Tap")
                             isPresentingAddLinkSheet = true
                         }
                         
@@ -41,9 +48,11 @@ struct CreateBookView: View {
                 }
                 .listStyle(GroupedListStyle())
                 .sheet(isPresented: $isPresentingAddLinkSheet, onDismiss: {
-                    // TODO: fix error if they cancel
-                    links.append(newLink!)
-                    newLink = nil
+                    if newLink != nil {
+                        links.append(newLink!)
+                        newLink = nil
+                    }
+                    isPresentingAddLinkSheet = false
                 }, content: {
                     CreateLinkView(link: $newLink)
                 })

@@ -13,28 +13,17 @@ struct BooksView: View {
     @FetchRequest(entity: Book.entity(), sortDescriptors: []) var books: FetchedResults<Book>
     
     var body: some View {
-        ForEach(books.indices, id: \.self) { index in
-            BookView(book: books[index], isSelected: Binding<Bool>(
-                get: {
-                    selectedBook == index
-                    
-                },
-                set: {  newValue in
-                    selectedBook = -1
-                    
-                }
-            ))
-            .onTapGesture {
-                selectedBook = selectedBook == index ? -1 : index
-            }
-        }
         List {
             ForEach(books, id: \.self) { book in
                 Section(header: Text(book.title)) {
                     ForEach(book.linkArray, id: \.self) { link in
                         HStack {
-                            Image(systemName: link.symbolName!)
-                            Text(link.url!)
+                            Image(systemName: link.symbolName ?? "link")
+                            Text(link.name ?? "")
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            UIApplication.shared.open(URL(string: link.url!)!)
                         }
                     }
                 }

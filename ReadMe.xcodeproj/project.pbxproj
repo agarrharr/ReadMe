@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		992E0EC426D981910093EA3C /* CreateLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC326D981910093EA3C /* CreateLinkView.swift */; };
-		9968EB8126B4AEE8005EB171 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9968EB8026B4AEE8005EB171 /* BookView.swift */; };
 		9988F2B026D9716A0093675E /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2AE26D9716A0093675E /* Book+CoreDataClass.swift */; };
 		9988F2B126D9716A0093675E /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2AF26D9716A0093675E /* Book+CoreDataProperties.swift */; };
 		9988F2B426D972490093675E /* Books.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2B226D972490093675E /* Books.xcdatamodeld */; };
@@ -26,7 +25,6 @@
 
 /* Begin PBXFileReference section */
 		992E0EC326D981910093EA3C /* CreateLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLinkView.swift; sourceTree = "<group>"; };
-		9968EB8026B4AEE8005EB171 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 		9988F2AE26D9716A0093675E /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9988F2AF26D9716A0093675E /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9988F2B326D972490093675E /* Books.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Books.xcdatamodel; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				99D04943262DF34800241FAD /* ContentView.swift */,
-				9968EB8026B4AEE8005EB171 /* BookView.swift */,
 				99E3E9C026D953FD00B13674 /* CreateBookView.swift */,
 				9988F2B526D973150093675E /* BooksView.swift */,
 				992E0EC326D981910093EA3C /* CreateLinkView.swift */,
@@ -199,7 +196,6 @@
 				9988F2BA26D978490093675E /* Link+CoreDataProperties.swift in Sources */,
 				9988F2B926D978490093675E /* Link+CoreDataClass.swift in Sources */,
 				992E0EC426D981910093EA3C /* CreateLinkView.swift in Sources */,
-				9968EB8126B4AEE8005EB171 /* BookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
