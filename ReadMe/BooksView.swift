@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BooksView: View {
+    @State var isPresentingAddBookSheet = false
+    
     @FetchRequest(entity: Book.entity(), sortDescriptors: []) var books: FetchedResults<Book>
     
     var body: some View {
@@ -26,11 +28,28 @@ struct BooksView: View {
                 }
             }
         }
+        .navigationBarTitle("Books")
+        .navigationBarItems(
+            trailing: Button(action: { isPresentingAddBookSheet = true}) {
+                Text("Add book")
+            }
+        )
+        .sheet(isPresented: $isPresentingAddBookSheet, content: {
+            CreateBookView()
+        })
     }
 }
 
 struct BooksView_Previews: PreviewProvider {
     static var previews: some View {
-        BooksView()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let book = Book(context: context)
+        book.title = "Hello"
+        
+        return NavigationView {
+            BooksView()
+                .environment(\.managedObjectContext, context)
+        }
     }
 }

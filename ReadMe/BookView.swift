@@ -10,6 +10,8 @@ import SwiftUI
 
 struct BookView: View {
     @State var book: Book
+    @State var newLink: Link?
+    @State var isPresentingAddLinkSheet = false
     
     let layout = [
         GridItem(.adaptive(minimum: 150))
@@ -56,8 +58,20 @@ struct BookView: View {
             .padding(.horizontal)
         }
         .padding()
+        .sheet(isPresented: $isPresentingAddLinkSheet, onDismiss: {
+            if newLink != nil {
+                book.links = NSSet(array: book.linkArray + [newLink!])
+                newLink = nil
+            }
+            isPresentingAddLinkSheet = false
+        }, content: {
+            CreateLinkView(link: $newLink)
+        })
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(trailing: Button(action: { isPresentingAddLinkSheet = true }, label: {
+            Text("Add link")
+        }))
     }
 }
 

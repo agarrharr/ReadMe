@@ -41,7 +41,7 @@ struct CreateBookView: View {
                         HStack {
                             Image(systemName: "plus.circle.fill")
                                 .foregroundColor(.green)
-                            Text("Add Link")
+                            Text("Add link")
                             Spacer()
                         }
                         .contentShape(Rectangle())
