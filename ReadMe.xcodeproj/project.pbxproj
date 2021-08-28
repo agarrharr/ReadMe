@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		992E0EC426D981910093EA3C /* CreateLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC326D981910093EA3C /* CreateLinkView.swift */; };
+		992E0EC626DADD7F0093EA3C /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC526DADD7F0093EA3C /* ScannerViewController.swift */; };
+		992E0EC826DAE0230093EA3C /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC726DAE0230093EA3C /* ScannerView.swift */; };
 		9988F2B026D9716A0093675E /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2AE26D9716A0093675E /* Book+CoreDataClass.swift */; };
 		9988F2B126D9716A0093675E /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2AF26D9716A0093675E /* Book+CoreDataProperties.swift */; };
 		9988F2B426D972490093675E /* Books.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2B226D972490093675E /* Books.xcdatamodeld */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		992E0EC326D981910093EA3C /* CreateLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLinkView.swift; sourceTree = "<group>"; };
+		992E0EC526DADD7F0093EA3C /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		992E0EC726DAE0230093EA3C /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		9988F2AE26D9716A0093675E /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9988F2AF26D9716A0093675E /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9988F2B326D972490093675E /* Books.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Books.xcdatamodel; sourceTree = "<group>"; };
@@ -95,10 +99,12 @@
 		99D04954262DF71E00241FAD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				992E0EC526DADD7F0093EA3C /* ScannerViewController.swift */,
 				99D04943262DF34800241FAD /* ContentView.swift */,
 				99E3E9C026D953FD00B13674 /* CreateBookView.swift */,
 				9988F2B526D973150093675E /* BooksView.swift */,
 				992E0EC326D981910093EA3C /* CreateLinkView.swift */,
+				992E0EC726DAE0230093EA3C /* ScannerView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -189,11 +195,13 @@
 				99D04944262DF34800241FAD /* ContentView.swift in Sources */,
 				9988F2B126D9716A0093675E /* Book+CoreDataProperties.swift in Sources */,
 				9988F2B026D9716A0093675E /* Book+CoreDataClass.swift in Sources */,
+				992E0EC826DAE0230093EA3C /* ScannerView.swift in Sources */,
 				99E3E9C126D953FD00B13674 /* CreateBookView.swift in Sources */,
 				99E3E9BF26D94FDD00B13674 /* SceneDelegate.swift in Sources */,
 				9988F2B626D973150093675E /* BooksView.swift in Sources */,
 				99D04952262DF50100241FAD /* BookStruct.swift in Sources */,
 				9988F2BA26D978490093675E /* Link+CoreDataProperties.swift in Sources */,
+				992E0EC626DADD7F0093EA3C /* ScannerViewController.swift in Sources */,
 				9988F2B926D978490093675E /* Link+CoreDataClass.swift in Sources */,
 				992E0EC426D981910093EA3C /* CreateLinkView.swift in Sources */,
 			);
