@@ -26,18 +26,6 @@ extension Book {
             ($0.url ?? "") < ($1.url ?? "")
         }
     }
-
-//    static func create(withTitle title: String, in context: NSManagedObjectContext) {
-//        let book = Book(context: context)
-//
-//        book.title = title
-//
-//        do {
-//            try context.save()
-//        } catch {
-//            fatalError("Unresolved error \(error)")
-//        }
-//    }
     
     static func createWith(title: String, links: [Link], in context: NSManagedObjectContext) -> Book {
         let book = Book(context: context)

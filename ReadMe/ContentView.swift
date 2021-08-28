@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var selectedIndex: Int = -1
     @State var isPresentingAddBookSheet = false
+    
+    @FetchRequest(entity: Book.entity(), sortDescriptors: []) var books: FetchedResults<Book>
     
     var body: some View {
         NavigationView {
