@@ -9,7 +9,7 @@ import AVFoundation
 import SwiftUI
 
 struct ScannerView: UIViewControllerRepresentable {
-    let barcode: Binding<String?>
+    let barcode: Binding<String>
     
     func makeUIViewController(context: Context) -> ScannerViewController {
         let scanner = ScannerViewController()

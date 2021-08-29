@@ -10,10 +10,10 @@ import SwiftUI
 
 struct CreateBookView: View {
     @State var title: String = ""
+    @State var isbn: String = ""
     @State var isPresentingAddLinkSheet = false
     @State var links: [Link] = []
     @State var newLink: Link?
-    @State var barcode: String? = nil
     @State var isPresentingScanner = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -21,11 +21,9 @@ struct CreateBookView: View {
     
     var body: some View {
         VStack {
-            Text(barcode ?? "")
-            
-            if barcode != nil {
+            if isbn != "" {
                 Image(systemName: "placeholder image")
-                    .data(url: URL(string: "https://covers.openlibrary.org/b/isbn/\(barcode!)-L.jpg")!)
+                    .data(url: URL(string: "https://covers.openlibrary.org/b/isbn/\(isbn)-L.jpg")!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     
@@ -35,9 +33,15 @@ struct CreateBookView: View {
                 Text("Scan barcode")
             }
             List {
-                Section(header: Text("Title")) {
-                    TextField("Enter a title", text: $title)
-                    
+                HStack {
+                    Text("Title")
+                    Spacer()
+                    TextField("Enter the title", text: $title)
+                }
+                HStack {
+                    Text("ISBN")
+                    Spacer()
+                    TextField("Enter the ISBN", text: $isbn)
                 }
                 Section(header: Text("Links")) {
                     ForEach(links, id: \.self) { link in
@@ -72,7 +76,7 @@ struct CreateBookView: View {
                 }
             })
             .sheet(isPresented: $isPresentingScanner, content: {
-                ScannerView(barcode: $barcode)
+                ScannerView(barcode: $isbn)
             })
             Spacer()
         }
