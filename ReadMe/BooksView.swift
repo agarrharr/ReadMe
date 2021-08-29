@@ -15,17 +15,15 @@ struct BooksView: View {
     var body: some View {
         List {
             ForEach(books, id: \.self) { book in
-                ForEach(book.linkArray, id: \.self) { link in
-                    NavigationLink(
-                        destination: BookView(book: book),
-                        label: {
-                            HStack {
-                                // TODO: Add book image?
-                                // Image(systemName: link.symbolName ?? "link")
-                                Text(book.title)
-                            }
-                        })
-                }
+                NavigationLink(
+                    destination: BookView(book: book),
+                    label: {
+                        HStack {
+                            // TODO: Add book image?
+                            // Image(systemName: link.symbolName ?? "link")
+                            Text(book.title)
+                        }
+                    })
             }
         }
         .navigationBarTitle("Books")

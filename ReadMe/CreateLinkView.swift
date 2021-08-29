@@ -10,8 +10,6 @@ import SwiftUI
 
 let systemNames = ["link", "link.circle.fill", "link.icloud.fill", "car.fill", "car.2.fill", "bolt.car.fill", "bus.fill", "bus.doubledecker.fill", "tram.fill", "tram.tunnel.fill", "bicycle"]
 
-
-
 struct CreateLinkView: View {
     @State var url: String = ""
     @State var name: String = ""

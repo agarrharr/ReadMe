@@ -13,6 +13,8 @@ struct BookView: View {
     @State var newLink: Link?
     @State var isPresentingAddLinkSheet = false
     
+    @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
+    
     let layout = [
         GridItem(.adaptive(minimum: 150))
     ]
@@ -60,7 +62,7 @@ struct BookView: View {
         .padding()
         .sheet(isPresented: $isPresentingAddLinkSheet, onDismiss: {
             if newLink != nil {
-                book.links = NSSet(array: book.linkArray + [newLink!])
+                book.add(link: newLink!, in: viewContext)
                 newLink = nil
             }
             isPresentingAddLinkSheet = false

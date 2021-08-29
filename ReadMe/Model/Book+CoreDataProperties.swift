@@ -31,7 +31,6 @@ extension Book {
         let book = Book(context: context)
 
         book.title = title
-    
         book.links = NSSet(array: links)
 
         do {
@@ -41,6 +40,18 @@ extension Book {
         }
         
         return book
+    }
+    
+    func add(link: Link, in context: NSManagedObjectContext) {
+//        let book = Book(context: context)
+
+        self.links = NSSet(array: self.linkArray + [link])
+
+        do {
+            try context.save()
+        } catch {
+            fatalError("Error saving book: \(error)")
+        }
     }
     
     static func basicFetchRequest() -> FetchRequest<Book> {
