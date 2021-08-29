@@ -46,8 +46,8 @@ struct CreateBookView: View {
                 Section(header: Text("Links")) {
                     ForEach(links, id: \.self) { link in
                         HStack {
-                            Image(systemName: link.symbolName!)
-                            Text(link.url!)
+                            Image(systemName: link.symbolName ?? "link")
+                            Text(link.name ?? "")
                         }
                     }
                     HStack {
