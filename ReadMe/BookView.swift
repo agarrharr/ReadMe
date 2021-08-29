@@ -67,7 +67,9 @@ struct BookView: View {
             }
             isPresentingAddLinkSheet = false
         }, content: {
-            CreateLinkView(link: $newLink)
+            NavigationView {
+                CreateLinkView(link: $newLink)
+            }
         })
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
