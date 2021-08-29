@@ -13,7 +13,7 @@ struct CreateBookView: View {
     @State var isPresentingAddLinkSheet = false
     @State var links: [Link] = []
     @State var newLink: Link?
-    @State var barcode = ""
+    @State var barcode: String? = nil
     @State var isPresentingScanner = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -21,7 +21,16 @@ struct CreateBookView: View {
     
     var body: some View {
         VStack {
-            Text(barcode)
+            Text(barcode ?? "")
+            
+            if barcode != nil {
+                Image(systemName: "placeholder image")
+                    .data(url: URL(string: "https://covers.openlibrary.org/b/isbn/\(barcode!)-L.jpg")!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    
+            }
+            
             Button(action: { isPresentingScanner = true}) {
                 Text("Scan barcode")
             }
