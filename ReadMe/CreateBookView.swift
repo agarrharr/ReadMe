@@ -29,21 +29,31 @@ struct CreateBookView: View {
                     
             }
             
-            Button(action: { isPresentingScanner = true}) {
-                Text("Scan barcode")
-            }
             List {
-                HStack {
-                    Text("Title")
-                    Spacer()
-                    TextField("Enter the title", text: $title)
+                Section {
+                    HStack {
+                        Text("Title")
+                        Spacer()
+                        TextField("Enter the title", text: $title)
+                    }
+                    HStack {
+                        Text("ISBN")
+                        Spacer()
+                        TextField("Enter the ISBN", text: $isbn)
+                    }
                 }
-                HStack {
-                    Text("ISBN")
-                    Spacer()
-                    TextField("Enter the ISBN", text: $isbn)
+                
+                Section {
+                    Button(action: { isPresentingScanner = true }) {
+                        HStack {
+                            Image(systemName: "barcode")
+                            Text("Scan barcode")
+                            Spacer()
+                        }
+                    }
                 }
-                Section(header: Text("Links")) {
+                
+                Section(header: Text("Links"), footer: Text("Links are an easy way to get to things related to this book. Don't worry, you can always add links later.")) {
                     ForEach(links, id: \.self) { link in
                         HStack {
                             Image(systemName: link.symbolName ?? "link")
