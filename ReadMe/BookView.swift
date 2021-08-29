@@ -81,21 +81,32 @@ struct BookView: View {
 
 struct BookView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        let book = Book.createWith(
-            title: "Watership Down",
-            links: [
-                Link.createWith(url: "http://google.com", name: "Google", systemName: "link", in: viewContext),
-                Link.createWith(url: "http://google.com", name: "Goodreads", systemName: "g.square.fill", in: viewContext),
-                Link.createWith(url: "http://google.com", name: "Start Timer", systemName: "timer", in: viewContext),
-                Link.createWith(url: "http://google.com", name: "Notes", systemName: "note.text", in: viewContext)
-            ],
-            in: viewContext)
+        let link1 = Link(context: context)
+        link1.url = "http://google.com"
+        link1.name = "Google"
+        link1.symbolName = "link"
+        let link2 = Link(context: context)
+        link2.url = "http://google.com"
+        link2.name = "Goodreads"
+        link2.symbolName = "g.square.fill"
+        let link3 = Link(context: context)
+        link3.url = "http://google.com"
+        link3.name = "Start Timer"
+        link3.symbolName = "timer"
+        let link4 = Link(context: context)
+        link4.url = "http://google.com"
+        link4.name = "Notes"
+        link4.symbolName = "note.text"
         
-        NavigationView {
+        let book = Book(context: context)
+        book.title = "Watership Down"
+        book.links = NSSet(array: [link1, link2, link3, link4])
+        
+        return NavigationView {
             BookView(book: book)
-                .environment(\.managedObjectContext, viewContext)
+                .environment(\.managedObjectContext, context)
         }
     }
 }

@@ -65,7 +65,11 @@ struct CreateLinkView: View {
                         .fontWeight(.bold)
                 },
                 trailing: Button(action: {
-                    link = Link.createWith(url: url, name: name, systemName: systemName, in: viewContext)
+//                    link = Link.createWith(url: url, name: name, systemName: systemName, in: viewContext)
+                    link = Link(context: viewContext)
+                    link!.url = url
+                    link!.name = name
+                    link!.symbolName = systemName
                     
                     self.presentationMode.wrappedValue
                         .dismiss()

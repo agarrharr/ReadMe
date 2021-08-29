@@ -17,6 +17,7 @@ extension Book {
     }
 
     @NSManaged public var title: String
+    @NSManaged public var isbn: String
     @NSManaged public var links: NSSet?
     
     public var linkArray: [Link] {
@@ -27,7 +28,7 @@ extension Book {
         }
     }
     
-    static func createWith(title: String, links: [Link], in context: NSManagedObjectContext) -> Book {
+    static func createWith(title: String, links: [Link], in context: NSManagedObjectContext) {
         let book = Book(context: context)
 
         book.title = title
@@ -38,13 +39,23 @@ extension Book {
         } catch {
             fatalError("Error saving book: \(error)")
         }
-        
-        return book
+    }
+    
+    static func createWith(title: String, isbn: String, links: [Link], in context: NSManagedObjectContext) {
+        let book = Book(context: context)
+
+        book.title = title
+        book.isbn = isbn
+        book.links = NSSet(array: links)
+
+        do {
+            try context.save()
+        } catch {
+            fatalError("Error saving book: \(error)")
+        }
     }
     
     func add(link: Link, in context: NSManagedObjectContext) {
-//        let book = Book(context: context)
-
         self.links = NSSet(array: self.linkArray + [link])
 
         do {
