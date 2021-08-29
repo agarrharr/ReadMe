@@ -20,71 +20,72 @@ struct CreateBookView: View {
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Text(barcode)
-                Button(action: { isPresentingScanner = true}) {
-                    Text("Scan barcode")
-                }
-                List {
-                    Section(header: Text("Title")) {
-                        TextField("Enter a title", text: $title)
-                            
-                    }
-                    Section(header: Text("Links")) {
-                        ForEach(links, id: \.self) { link in
-                            HStack {
-                                Image(systemName: link.symbolName!)
-                                Text(link.url!)
-                            }
-                        }
-                        HStack {
-                            Image(systemName: "plus.circle.fill")
-                                .foregroundColor(.green)
-                            Text("Add link")
-                            Spacer()
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            print("Tap")
-                            isPresentingAddLinkSheet = true
-                        }
-                        
-                    }
-                }
-                .listStyle(GroupedListStyle())
-                .sheet(isPresented: $isPresentingAddLinkSheet, onDismiss: {
-                    if newLink != nil {
-                        links.append(newLink!)
-                        newLink = nil
-                    }
-                    isPresentingAddLinkSheet = false
-                }, content: {
-                    CreateLinkView(link: $newLink)
-                })
-                .sheet(isPresented: $isPresentingScanner, content: {
-                    ScannerView(barcode: $barcode)
-                })
-                Spacer()
+        VStack {
+            Text(barcode)
+            Button(action: { isPresentingScanner = true}) {
+                Text("Scan barcode")
             }
-            .navigationBarItems(
-                leading: Button(action: {
-                    self.presentationMode.wrappedValue
-                        .dismiss()
-                }) {
-                    Text("Cancel")
-                        .fontWeight(.bold)
-                },
-                trailing: Button(action: {
-                    Book.createWith(title: title, links: links, in: viewContext)
+            List {
+                Section(header: Text("Title")) {
+                    TextField("Enter a title", text: $title)
                     
-                    self.presentationMode.wrappedValue
-                        .dismiss()
-                }) {
-                    Text("Save")
-                        .fontWeight(.bold)
-                })
+                }
+                Section(header: Text("Links")) {
+                    ForEach(links, id: \.self) { link in
+                        HStack {
+                            Image(systemName: link.symbolName!)
+                            Text(link.url!)
+                        }
+                    }
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.green)
+                        Text("Add link")
+                        Spacer()
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        isPresentingAddLinkSheet = true
+                    }
+                    
+                }
+            }
+            .listStyle(GroupedListStyle())
+            .sheet(isPresented: $isPresentingAddLinkSheet, onDismiss: {
+                if newLink != nil {
+                    links.append(newLink!)
+                    newLink = nil
+                }
+                isPresentingAddLinkSheet = false
+            }, content: {
+                NavigationView {
+                    CreateLinkView(link: $newLink)
+                }
+            })
+            .sheet(isPresented: $isPresentingScanner, content: {
+                ScannerView(barcode: $barcode)
+            })
+            Spacer()
         }
+        .navigationBarTitle("Book")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(
+            leading: Button(action: {
+                self.presentationMode.wrappedValue
+                    .dismiss()
+            }) {
+                Text("Cancel")
+                    .fontWeight(.bold)
+            },
+            trailing: Button(action: {
+                Book.createWith(title: title, links: links, in: viewContext)
+                
+                self.presentationMode.wrappedValue
+                    .dismiss()
+            }) {
+                Text("Save")
+                    .fontWeight(.bold)
+            })
     }
 }
 

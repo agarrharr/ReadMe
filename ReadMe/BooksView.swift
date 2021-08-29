@@ -33,7 +33,9 @@ struct BooksView: View {
             }
         )
         .sheet(isPresented: $isPresentingAddBookSheet, content: {
-            CreateBookView()
+            NavigationView {
+                CreateBookView()
+            }
         })
     }
 }

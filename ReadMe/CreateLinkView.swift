@@ -15,68 +15,47 @@ struct CreateLinkView: View {
     @State var name: String = ""
     @State var systemName: String = systemNames[0]
     @Binding var link: Link?
-    @State var tabSelection = 1
+    @State var isPresentingIconSheet = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
     
-    let rows: [GridItem] =
-            Array(repeating: .init(.fixed(40)), count: 3)
-    
     var body: some View {
-        NavigationView {
-            VStack {
-                Image(systemName: systemName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color(.systemGreen))
-                    .cornerRadius(16)
-                List {
-                    Section(header: Text("Name")) {
-                        TextField("Enter the name", text: $name)
+        VStack {
+            List {
+                Section {
+                    HStack {
+                        Text("Name")
+                        Spacer()
+                        TextField("Link name", text: $name)
                     }
-                    Section(header: Text("URL")) {
-                        TextField("Enter the URL", text: $url)
-                    }
-                    Section(header: Text("Image")) {
-                        Picker("", selection: $tabSelection) {
-                            Text("Color").tag(1)
-                            Text("Glyph").tag(2)
-                        }
-                        .pickerStyle(SegmentedPickerStyle())
-                        if (tabSelection == 1) {
-                            Text("Colors")
-                        } else {
-                            ScrollView(.horizontal) {
-                                LazyHGrid(rows: rows, spacing: 0) {
-                                    ForEach(systemNames, id: \.self) { systemName in
-                                        Image(systemName: systemName)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 20, height: 20)
-                                            .foregroundColor(.gray)
-                                            .padding(8)
-                                            .background(
-                                                systemName == self.systemName
-                                                ? Color(.lightGray)
-                                                    : Color(.clear)
-                                            )
-                                            .cornerRadius(8.0)
-                                            .onTapGesture {
-                                                self.systemName = systemName
-                                            }
-                                    }
-                                }
-                            }
-                        }
+                    HStack {
+                        Text("URL")
+                        Spacer()
+                        TextField("url://", text: $url)
                     }
                 }
-                .listStyle(GroupedListStyle())
-                
+                Section(header: Text("Options")) {
+                    HStack {
+                        Text("Icon")
+                        Spacer()
+                        Image(systemName: systemName)
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        isPresentingIconSheet = true
+                    }
+                    .sheet(isPresented: $isPresentingIconSheet, content: {
+                        NavigationView {
+                            IconEditView(systemName: $systemName)
+                        }
+                    })
+                    
+                }
             }
+            .listStyle(GroupedListStyle())
+            .navigationBarTitle("Link")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
                 leading: Button(action: {
                     self.presentationMode.wrappedValue
@@ -94,6 +73,7 @@ struct CreateLinkView: View {
                     Text("Save")
                         .fontWeight(.bold)
                 })
+            Spacer()
         }
     }
 }
