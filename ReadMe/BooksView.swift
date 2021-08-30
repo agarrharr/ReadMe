@@ -29,7 +29,7 @@ struct BooksView: View {
         .navigationBarTitle("Books")
         .navigationBarItems(
             trailing: Button(action: { isPresentingAddBookSheet = true}) {
-                Text("Add book")
+                Text("Add Book")
             }
         )
         .sheet(isPresented: $isPresentingAddBookSheet, content: {

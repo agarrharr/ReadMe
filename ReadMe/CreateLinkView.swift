@@ -16,6 +16,7 @@ struct CreateLinkView: View {
     @State var systemName: String = systemNames[0]
     @Binding var link: Link?
     @State var isPresentingIconSheet = false
+    @State var isPresentingLinkComposerSheet = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
@@ -35,6 +36,19 @@ struct CreateLinkView: View {
                         TextField("url://", text: $url)
                     }
                 }
+                
+                Section {
+                    Text("Link Composer")
+                        .onTapGesture {
+                            isPresentingLinkComposerSheet = true
+                        }
+                        .sheet(isPresented: $isPresentingLinkComposerSheet, content: {
+                            NavigationView {
+                                LinkComposerView(url: $url)
+                            }
+                        })
+                }
+                
                 Section(header: Text("Options")) {
                     HStack {
                         Text("Icon")
@@ -65,7 +79,6 @@ struct CreateLinkView: View {
                         .fontWeight(.bold)
                 },
                 trailing: Button(action: {
-//                    link = Link.createWith(url: url, name: name, systemName: systemName, in: viewContext)
                     link = Link(context: viewContext)
                     link!.url = url
                     link!.name = name

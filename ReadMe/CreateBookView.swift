@@ -47,7 +47,7 @@ struct CreateBookView: View {
                     Button(action: { isPresentingScanner = true }) {
                         HStack {
                             Image(systemName: "barcode")
-                            Text("Scan barcode")
+                            Text("Scan Barcode")
                             Spacer()
                         }
                     }
@@ -63,7 +63,7 @@ struct CreateBookView: View {
                     HStack {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green)
-                        Text("Add link")
+                        Text("Add Link")
                         Spacer()
                     }
                     .contentShape(Rectangle())
