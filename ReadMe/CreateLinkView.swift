@@ -36,15 +36,18 @@ struct CreateLinkView: View {
                 }
                 
                 Section {
-                    Text("Link Composer")
-                        .onTapGesture {
-                            isPresentingLinkComposerSheet = true
+                    HStack {
+                        Text("Link Composer")
+                        Spacer()
+                    }
+                    .onTapGesture {
+                        isPresentingLinkComposerSheet = true
+                    }
+                    .sheet(isPresented: $isPresentingLinkComposerSheet, content: {
+                        NavigationView {
+                            LinkComposerView(url: $url)
                         }
-                        .sheet(isPresented: $isPresentingLinkComposerSheet, content: {
-                            NavigationView {
-                                LinkComposerView(url: $url)
-                            }
-                        })
+                    })
                 }
                 
                 Section(header: Text("Options")) {

@@ -53,6 +53,21 @@ let apps: [App] = [
                        defaultText: "Found while reading",
                        helpText: nil
                 )]
+        ),
+        Action(name: "Search",
+               url: "lookupapp://?search?{{$1}}",
+               description: nil,
+               options: [
+                Option(name: "Name",
+                       placeholder: "Action Name",
+                       defaultText: "Search",
+                       helpText: nil
+                ),
+                Option(name: "Query",
+                       placeholder: "",
+                       defaultText: "[prompt:Query]",
+                       helpText: nil
+                )]
         )]
     )
     //
@@ -106,11 +121,15 @@ struct LinkComposerView: View {
         List {
             ForEach(apps, id: \.appName) { app in
                 if app.action != nil {
-                    Text(app.appName)
-                        .onTapGesture {
-                            url = app.action!
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                    HStack {
+                        Text(app.appName)
+                        Spacer()
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        url = app.action!
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 } else if app.actions != nil {
                     NavigationLink(
                         destination: LinkComposerActionsView(appName: app.appName, actions: app.actions!),
