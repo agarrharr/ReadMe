@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LinkComposerActionsView: View {
-    @State var appName: String
-    @State var actions: [Action]
+    var appName: String
+    var actions: [Action]
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -19,12 +19,12 @@ struct LinkComposerActionsView: View {
                 ForEach(actions, id: \.name) { action in
                     if action.options == nil {
                         Text(action.name)
-                    } else if action.options != nil {
-//                        NavigationLink(
-//                            destination: LinkComposerActionOptionsView(options: action.options),
-//                            label: {
-//                                Text(action.name)
-//                            })
+                    } else if let options = action.options {
+                        NavigationLink(
+                            destination: LinkComposerActionOptionsView(options: options, action: action),
+                            label: {
+                                Text(action.name)
+                            })
                     }
                 }
             }
@@ -45,24 +45,7 @@ struct LinkComposerActionsView: View {
 struct LinkComposerOptionsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            let actions = [
-                Action(name: "Launch Lookup",
-                       url: "lookupapp://",
-                       description: nil,
-                       options: nil
-                ),
-                Action(name: "Open Collection",
-                       url: "lookupapp://?collection='{{$0}}'",
-                       description: nil,
-                       options: [
-                        Option(name: "Name",
-                               placeholder: "Action Name",
-                               defaultText: "Open Collection",
-                               helpText: nil
-                        )]
-                )]
-            
-            LinkComposerActionsView(appName: "Lookup", actions: actions)
+            LinkComposerActionsView(appName: "Lookup", actions: apps[1].actions!)
         }
     }
 }

@@ -55,7 +55,7 @@ let apps: [App] = [
                 )]
         ),
         Action(name: "Search",
-               url: "lookupapp://?search?{{$1}}",
+               url: "lookupapp://?search={{$1}}",
                description: nil,
                options: [
                 Option(name: "Name",
@@ -154,6 +154,7 @@ struct LinkComposerView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             LinkComposerView(url: .constant(""))
+                .environmentObject(LinkComposer())
         }
     }
 }

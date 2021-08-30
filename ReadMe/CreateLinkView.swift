@@ -9,12 +9,12 @@ import CoreData
 import SwiftUI
 
 struct CreateLinkView: View {
-    @State var url: String = ""
-    @State var name: String = ""
+    @State private var url: String = ""
+    @State private var name: String = ""
     @State var systemName: String = "link"
     @Binding var link: Link?
-    @State var isPresentingIconSheet = false
-    @State var isPresentingLinkComposerSheet = false
+    @State private var isPresentingIconSheet = false
+    @StateObject private var linkComposer = LinkComposer()
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
@@ -41,13 +41,16 @@ struct CreateLinkView: View {
                         Spacer()
                     }
                     .onTapGesture {
-                        isPresentingLinkComposerSheet = true
+                        linkComposer.isPresenting = true
                     }
-                    .sheet(isPresented: $isPresentingLinkComposerSheet, content: {
+                    .sheet(isPresented: $linkComposer.isPresenting) {
+                        url = linkComposer.url
+                    } content: {
                         NavigationView {
                             LinkComposerView(url: $url)
                         }
-                    })
+                        .environmentObject(linkComposer)
+                    }
                 }
                 
                 Section(header: Text("Options")) {
@@ -100,6 +103,7 @@ struct CreateLinkView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             CreateLinkView(link: .constant(Link()))
+                .environmentObject(LinkComposer())
         }
     }
 }

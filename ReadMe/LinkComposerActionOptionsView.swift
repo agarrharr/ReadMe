@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct LinkComposerActionOptionsView: View {
-    @State var options: [Option]
-    @State var optionValues: [String] = []
+    var options: [Option]
+    var action: Action
+    @EnvironmentObject private var linkComposer: LinkComposer
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         List {
             Section {
-                ForEach(options, id: \.name) { option in
+                ForEach(options.indices) { i in
                     HStack {
-                        Text(option.name)
+                        Text(options[i].name)
                         Spacer()
-                        //TextField(option.placeholder, text: option.placeholder)
+                        TextField(options[i].placeholder, text: $linkComposer.optionValues[i])
                     }
                 }
             }
@@ -29,12 +30,13 @@ struct LinkComposerActionOptionsView: View {
         .navigationBarTitle("Options")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button(action: {
-            // Save
-            
-            presentationMode.wrappedValue.dismiss()
+            linkComposer.updateURL()
         }) {
             Text("Done")
         })
+        .onAppear {
+            linkComposer.setAction(action: action)
+        }
     }
 }
 
@@ -54,7 +56,8 @@ struct LinkComposerActionOptionsView_Previews: PreviewProvider {
         ]
         
         NavigationView {
-            LinkComposerActionOptionsView(options: options)
+            LinkComposerActionOptionsView(options: options, action: apps[1].actions![1])
+                .environmentObject(LinkComposer())
         }
     }
 }

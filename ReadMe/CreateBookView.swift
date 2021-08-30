@@ -26,7 +26,6 @@ struct CreateBookView: View {
                     .data(url: URL(string: "https://covers.openlibrary.org/b/isbn/\(isbn)-L.jpg")!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    
             }
             
             List {
@@ -60,17 +59,17 @@ struct CreateBookView: View {
                             Text(link.name ?? "")
                         }
                     }
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.green)
-                        Text("Add Link")
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
+                    Button {
                         isPresentingAddLinkSheet = true
+                    } label: {
+                        Label {
+                            Text("Add Link")
+                                .foregroundColor(.primary)
+                        } icon: {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.green)
+                        }
                     }
-                    
                 }
             }
             .listStyle(GroupedListStyle())
