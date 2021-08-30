@@ -11,11 +11,11 @@ struct IconEditView: View {
     @State var tabSelection = 1
     @State var temporarySystemName: String? = nil
     @Binding var systemName: String
+    @State var color: Color = Color(.red)
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    let rows: [GridItem] =
-        Array(repeating: .init(.fixed(40)), count: 3)
+    let columns: [GridItem] = Array(repeating: GridItem(), count: 5)
     
     var body: some View {
         VStack {
@@ -25,7 +25,7 @@ struct IconEditView: View {
                 .frame(width: 100, height: 100)
                 .padding()
                 .foregroundColor(.white)
-                .background(Color(.systemGreen))
+                .background(color)
                 .cornerRadius(16)
                 .padding()
             
@@ -35,29 +35,35 @@ struct IconEditView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             if (tabSelection == 1) {
-                Text("Colors")
+                ColorPicker("Color", selection: $color, supportsOpacity: false)
             } else {
-                ScrollView(.horizontal) {
-                    LazyHGrid(rows: rows, spacing: 0) {
-                        ForEach(systemNames, id: \.self) { systemName in
-                            Image(systemName: systemName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.gray)
-                                .padding(8)
-                                .background(
-                                    temporarySystemName ?? self.systemName == systemName
-                                        ? Color(.lightGray)
-                                        : Color(.clear)
-                                )
-                                .cornerRadius(8.0)
-                                .onTapGesture {
-                                    temporarySystemName = systemName
+                ScrollViewReader { proxy in
+                            ScrollView(.vertical) {
+                                LazyVGrid(columns: columns) {
+                                    ForEach(SymbolsList, id: \.self) { symbol in
+                                        Button {
+                                            temporarySystemName = symbol
+                                        } label: {
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .foregroundColor(symbol == temporarySystemName ? .accentColor : Color(.secondarySystemGroupedBackground))
+                                                    .aspectRatio(1, contentMode: .fill)
+                                                Image(systemName: symbol)
+                                                    .imageScale(.large)
+                                                    .foregroundColor(.primary)
+                                            }
+                                        }
+                                        .id(symbol)
+                                    }
                                 }
+                                .padding()
+                            }
+                            .background(Color(.systemGroupedBackground)
+                                            .edgesIgnoringSafeArea(.bottom))
+                            .onAppear {
+                                proxy.scrollTo(temporarySystemName, anchor: .center)
+                            }
                         }
-                    }
-                }
             }
             Spacer()
         }

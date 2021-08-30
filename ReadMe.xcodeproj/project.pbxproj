@@ -29,6 +29,7 @@
 		99FA202E26DC269B006AD0D1 /* LinkComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA202D26DC269B006AD0D1 /* LinkComposerView.swift */; };
 		99FA203026DD2E93006AD0D1 /* LinkComposerActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA202F26DD2E93006AD0D1 /* LinkComposerActionsView.swift */; };
 		99FA203226DD3638006AD0D1 /* LinkComposerActionOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA203126DD3638006AD0D1 /* LinkComposerActionOptionsView.swift */; };
+		99FA203526DD5970006AD0D1 /* SymbolsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA203426DD5970006AD0D1 /* SymbolsList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		99FA202D26DC269B006AD0D1 /* LinkComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkComposerView.swift; sourceTree = "<group>"; };
 		99FA202F26DD2E93006AD0D1 /* LinkComposerActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkComposerActionsView.swift; sourceTree = "<group>"; };
 		99FA203126DD3638006AD0D1 /* LinkComposerActionOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkComposerActionOptionsView.swift; sourceTree = "<group>"; };
+		99FA203426DD5970006AD0D1 /* SymbolsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		99D04940262DF34800241FAD /* ReadMe */ = {
 			isa = PBXGroup;
 			children = (
+				99FA203326DD595C006AD0D1 /* Resources */,
 				99E3E9B926D94C7900B13674 /* Model */,
 				99D04954262DF71E00241FAD /* Views */,
 				99D04951262DF50100241FAD /* BookStruct.swift */,
@@ -137,6 +140,14 @@
 				9988F2AF26D9716A0093675E /* Book+CoreDataProperties.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		99FA203326DD595C006AD0D1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				99FA203426DD5970006AD0D1 /* SymbolsList.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +235,7 @@
 				99D04952262DF50100241FAD /* BookStruct.swift in Sources */,
 				99FA202C26DC0ADE006AD0D1 /* Image.swift in Sources */,
 				9988F2BA26D978490093675E /* Link+CoreDataProperties.swift in Sources */,
+				99FA203526DD5970006AD0D1 /* SymbolsList.swift in Sources */,
 				992E0EC626DADD7F0093EA3C /* ScannerViewController.swift in Sources */,
 				99FA202A26DB062E006AD0D1 /* IconEditView.swift in Sources */,
 				9988F2B926D978490093675E /* Link+CoreDataClass.swift in Sources */,
