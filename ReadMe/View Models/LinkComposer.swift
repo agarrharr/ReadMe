@@ -11,10 +11,12 @@ class LinkComposer: ObservableObject {
     var action: Action?
     @Published var isPresenting = false
     @Published var url: String
+    @Published var actionName: String
     @Published var optionValues: [String]
     
     init() {
-        self.url = ""
+        url = ""
+        actionName = ""
         optionValues = []
     }
     
@@ -28,9 +30,20 @@ class LinkComposer: ObservableObject {
         }
     }
     
+    func set(url: String, actionName: String) {
+        self.url = url
+        self.actionName = actionName
+        
+        isPresenting = false
+    }
+    
     func updateURL() {
-        // TODO: actually construct the URL
-        url = "I'm updated"
+        if url == "" {
+            self.url = "I'm updated"
+            
+            // lookupapp://?collection='{{$1}}'&name={{$2}}
+            // ["lookupapp://?collection='{{", "$1", "}}'&name={{", "$2", "}}"]
+        }
         isPresenting = false
     }
 }

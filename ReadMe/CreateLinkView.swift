@@ -36,15 +36,14 @@ struct CreateLinkView: View {
                 }
                 
                 Section {
-                    HStack {
-                        Text("Link Composer")
-                        Spacer()
-                    }
+                    Text("Link Composer")
+                        .foregroundColor(.blue)
                     .onTapGesture {
                         linkComposer.isPresenting = true
                     }
                     .sheet(isPresented: $linkComposer.isPresenting) {
                         url = linkComposer.url
+                        name = linkComposer.actionName
                     } content: {
                         NavigationView {
                             LinkComposerView(url: $url)

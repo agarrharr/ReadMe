@@ -56,7 +56,7 @@ struct LinkComposerActionOptionsView_Previews: PreviewProvider {
         ]
         
         NavigationView {
-            LinkComposerActionOptionsView(options: options, action: apps[1].actions![1])
+            LinkComposerActionOptionsView(options: options, action: apps[1].actions[1])
                 .environmentObject(LinkComposer())
         }
     }

@@ -10,20 +10,28 @@ import SwiftUI
 struct LinkComposerActionsView: View {
     var appName: String
     var actions: [Action]
+    @EnvironmentObject private var linkComposer: LinkComposer
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         List {
             Section {
-                ForEach(actions, id: \.name) { action in
+                ForEach(actions, id: \.labelName) { action in
                     if action.options == nil {
-                        Text(action.name)
+                        HStack {
+                            Text(action.labelName)
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            linkComposer.set(url: action.url, actionName: action.actionName)
+                        }
                     } else if let options = action.options {
                         NavigationLink(
                             destination: LinkComposerActionOptionsView(options: options, action: action),
                             label: {
-                                Text(action.name)
+                                Text(action.labelName)
                             })
                     }
                 }
@@ -33,8 +41,6 @@ struct LinkComposerActionsView: View {
         .navigationBarTitle(appName)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button(action: {
-            // Save
-            
             presentationMode.wrappedValue.dismiss()
         }) {
             Text("Done")
@@ -45,7 +51,7 @@ struct LinkComposerActionsView: View {
 struct LinkComposerOptionsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LinkComposerActionsView(appName: "Lookup", actions: apps[1].actions!)
+            LinkComposerActionsView(appName: "Lookup", actions: apps[1].actions)
         }
     }
 }

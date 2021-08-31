@@ -9,12 +9,12 @@ import SwiftUI
 
 struct App {
     var appName: String
-    var action: String?
-    var actions: [Action]?
+    var actions: [Action]
 }
 
 struct Action {
-    var name: String
+    var labelName: String
+    var actionName: String
     var url: String
     var description: String?
     var options: [Option]?
@@ -28,18 +28,19 @@ struct Option {
 }
 
 let apps: [App] = [
-    App(appName: "Readwise", action: "readwise://", actions: nil),
+    App(appName: "Readwise", actions: [Action(labelName: "Launch Readwise", actionName: "Readwise", url: "readwise://", description: nil, options: nil)]),
     //"Scan Thing",
     //"Files",
     App(appName: "Lookup",
-     action: nil,
      actions: [
-        Action(name: "Launch Lookup",
+        Action(labelName: "Launch Lookup",
+               actionName: "Lookup",
                url: "lookupapp://",
                description: nil,
                options: nil
         ),
-        Action(name: "Open Collection",
+        Action(labelName: "Open Collection",
+               actionName: "OpenCollection",
                url: "lookupapp://?collection='{{$1}}'",
                description: nil,
                options: [
@@ -54,7 +55,8 @@ let apps: [App] = [
                        helpText: nil
                 )]
         ),
-        Action(name: "Search",
+        Action(labelName: "Search",
+               actionName: "Search",
                url: "lookupapp://?search={{$1}}",
                description: nil,
                options: [
@@ -114,25 +116,25 @@ let apps: [App] = [
 
 struct LinkComposerView: View {
     @Binding var url: String
+    @EnvironmentObject private var linkComposer: LinkComposer
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         List {
             ForEach(apps, id: \.appName) { app in
-                if app.action != nil {
+                if app.actions.count == 1 {
                     HStack {
                         Text(app.appName)
                         Spacer()
                     }
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        url = app.action!
-                        presentationMode.wrappedValue.dismiss()
+                        linkComposer.set(url: app.actions[0].url, actionName: app.actions[0].actionName)
                     }
-                } else if app.actions != nil {
+                } else if app.actions.count > 1 {
                     NavigationLink(
-                        destination: LinkComposerActionsView(appName: app.appName, actions: app.actions!),
+                        destination: LinkComposerActionsView(appName: app.appName, actions: app.actions),
                         label: {
                             Text(app.appName)
                         })
@@ -140,7 +142,7 @@ struct LinkComposerView: View {
             }
         }
         .listStyle(GroupedListStyle())
-        .navigationBarTitle("Composer")
+        .navigationBarTitle("Apps")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading: Button(action: {
             presentationMode.wrappedValue.dismiss()
