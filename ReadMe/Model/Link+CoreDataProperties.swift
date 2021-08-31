@@ -15,6 +15,7 @@ extension Link {
         return NSFetchRequest<Link>(entityName: "Link")
     }
 
+    @NSManaged public var id: UUID
     @NSManaged public var url: String?
     @NSManaged public var name: String?
     @NSManaged public var symbolName: String?

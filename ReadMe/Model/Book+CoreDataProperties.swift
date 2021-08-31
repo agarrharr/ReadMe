@@ -24,7 +24,7 @@ extension Book {
         let set = links as? Set<Link> ?? []
         
         return set.sorted {
-            ($0.url ?? "") < ($1.url ?? "")
+            $0.id < $1.id
         }
     }
     
@@ -56,6 +56,7 @@ extension Book {
 //    }
     
     func add(link: Link, in context: NSManagedObjectContext) {
+        link.id = UUID()
         self.links = NSSet(array: self.linkArray + [link])
 
         do {

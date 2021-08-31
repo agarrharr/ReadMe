@@ -10,7 +10,8 @@
 		992E0EC426D981910093EA3C /* CreateLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC326D981910093EA3C /* CreateLinkView.swift */; };
 		992E0EC626DADD7F0093EA3C /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC526DADD7F0093EA3C /* ScannerViewController.swift */; };
 		992E0EC826DAE0230093EA3C /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC726DAE0230093EA3C /* ScannerView.swift */; };
-		992E0ECA26DAEC4D0093EA3C /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC926DAEC4D0093EA3C /* BookView.swift */; };
+		992E0ECA26DAEC4D0093EA3C /* LinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E0EC926DAEC4D0093EA3C /* LinksView.swift */; };
+		9953EC3E26DEB201001EBFC5 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9953EC3D26DEB201001EBFC5 /* LinkView.swift */; };
 		9988F2B026D9716A0093675E /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2AE26D9716A0093675E /* Book+CoreDataClass.swift */; };
 		9988F2B126D9716A0093675E /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2AF26D9716A0093675E /* Book+CoreDataProperties.swift */; };
 		9988F2B426D972490093675E /* Books.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9988F2B226D972490093675E /* Books.xcdatamodeld */; };
@@ -36,7 +37,8 @@
 		992E0EC326D981910093EA3C /* CreateLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLinkView.swift; sourceTree = "<group>"; };
 		992E0EC526DADD7F0093EA3C /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		992E0EC726DAE0230093EA3C /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
-		992E0EC926DAEC4D0093EA3C /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		992E0EC926DAEC4D0093EA3C /* LinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksView.swift; sourceTree = "<group>"; };
+		9953EC3D26DEB201001EBFC5 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		9988F2AE26D9716A0093675E /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9988F2AF26D9716A0093675E /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9988F2B326D972490093675E /* Books.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Books.xcdatamodel; sourceTree = "<group>"; };
@@ -153,7 +155,8 @@
 			children = (
 				99D04943262DF34800241FAD /* ContentView.swift */,
 				9988F2B526D973150093675E /* BooksView.swift */,
-				992E0EC926DAEC4D0093EA3C /* BookView.swift */,
+				992E0EC926DAEC4D0093EA3C /* LinksView.swift */,
+				9953EC3D26DEB201001EBFC5 /* LinkView.swift */,
 				99E3E9C026D953FD00B13674 /* CreateBookView.swift */,
 				992E0EC726DAE0230093EA3C /* ScannerView.swift */,
 				992E0EC526DADD7F0093EA3C /* ScannerViewController.swift */,
@@ -252,9 +255,10 @@
 				99FA202E26DC269B006AD0D1 /* LinkComposerView.swift in Sources */,
 				99FA203026DD2E93006AD0D1 /* LinkComposerActionsView.swift in Sources */,
 				9988F2B626D973150093675E /* BooksView.swift in Sources */,
-				992E0ECA26DAEC4D0093EA3C /* BookView.swift in Sources */,
+				992E0ECA26DAEC4D0093EA3C /* LinksView.swift in Sources */,
 				99FA202C26DC0ADE006AD0D1 /* Image.swift in Sources */,
 				9988F2BA26D978490093675E /* Link+CoreDataProperties.swift in Sources */,
+				9953EC3E26DEB201001EBFC5 /* LinkView.swift in Sources */,
 				99FA203526DD5970006AD0D1 /* SymbolsList.swift in Sources */,
 				992E0EC626DADD7F0093EA3C /* ScannerViewController.swift in Sources */,
 				99FA202A26DB062E006AD0D1 /* IconEditView.swift in Sources */,

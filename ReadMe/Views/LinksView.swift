@@ -1,5 +1,5 @@
 //
-//  BookView.swift
+//  LinksView.swift
 //  ReadMe
 //
 //  Created by Adam Garrett-Harris on 8/28/21.
@@ -8,11 +8,13 @@
 import CoreData
 import SwiftUI
 
-struct BookView: View {
+struct LinksView: View {
     var book: Book
     
     @State private var newLink: Link?
     @State private var isPresentingAddLinkSheet = false
+    @State private var isDeletingLink: Link?
+
     
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
     
@@ -23,42 +25,20 @@ struct BookView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: layout, spacing: 12) {
-                ForEach(book.linkArray, id: \.self) { link in
-                    VStack {
-                        HStack {
-                            Image(systemName: link.symbolName ?? "link")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 20)
-                                .foregroundColor(.white)
-                            Spacer()
-                            Image(systemName: "ellipsis.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 20)
-                                .foregroundColor(.white)
-                                .foregroundColor(.white)
+                ForEach(book.linkArray, id: \.id) { link in
+                    LinkView(link: link)
+                        .contextMenu {
+                            // Button(role: .destructive) { // TODO: add for iOS 15
+                            Button {
+                                isDeletingLink = link
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
-                        .padding(.vertical, 1)
-                        Text(link.name ?? "")
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .fixedSize(horizontal: false, vertical: true)
-                        Spacer()
-                    }
-                    .frame(height: 90)
-                    .padding(12)
-                    .background(Color(.systemPurple))
-                    .cornerRadius(20)
-                    .onTapGesture {
-                        if let url = URL(string: link.url ?? "") {
-                            UIApplication.shared.open(url)
-                        }
-                    }
                 }
             }
             .padding(.horizontal)
+            .animation(.default, value: book.linkArray)
         }
         .padding()
         .sheet(isPresented: $isPresentingAddLinkSheet, onDismiss: {
@@ -72,11 +52,41 @@ struct BookView: View {
                 CreateLinkView(link: $newLink)
             }
         })
+        .actionSheet(isPresented: Binding<Bool>(get: { isDeletingLink != nil }, set: { _ in })) {
+            ActionSheet(title: Text("This action will be deleted"), buttons: [
+                .default(Text("Delete Action").foregroundColor(.red)) {
+                                deleteLink(link: isDeletingLink!)
+                    isDeletingLink = nil
+                            }
+            ])
+        }
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button(action: { isPresentingAddLinkSheet = true }, label: {
             Text("Add Action")
         }))
+    }
+    
+    func deleteLink(link: Link) {
+        viewContext.delete(link)
+        
+        do {
+            try viewContext.save()
+        } catch {
+            print("Failed to delete link: \(error)")
+        }
+    }
+    
+    func deleteLinks(at offsets: IndexSet) {
+        for index in offsets {
+            let link = book.linkArray[index]
+            viewContext.delete(link)
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            print("Failed to delete links: \(error)")
+        }
     }
 }
 
@@ -106,7 +116,7 @@ struct BookView_Previews: PreviewProvider {
         book.links = NSSet(array: [link1, link2, link3, link4])
         
         return NavigationView {
-            BookView(book: book)
+            LinksView(book: book)
                 .environment(\.managedObjectContext, context)
         }
     }

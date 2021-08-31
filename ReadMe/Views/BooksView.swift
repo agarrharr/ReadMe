@@ -18,7 +18,7 @@ struct BooksView: View {
         List {
             ForEach(books, id: \.self) { book in
                 NavigationLink(
-                    destination: BookView(book: book),
+                    destination: LinksView(book: book),
                     label: {
                         HStack {
                             // TODO: Add book image?

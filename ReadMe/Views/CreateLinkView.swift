@@ -83,6 +83,7 @@ struct CreateLinkView: View {
                 },
                 trailing: Button(action: {
                     link = Link(context: viewContext)
+                    link!.id = UUID()
                     link!.url = url
                     link!.name = name
                     link!.symbolName = systemName
