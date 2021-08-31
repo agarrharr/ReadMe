@@ -16,7 +16,7 @@ struct BooksView: View {
     
     var body: some View {
         List {
-            ForEach(books, id: \.self) { book in
+            ForEach(books, id: \.id) { book in
                 NavigationLink(
                     destination: LinksView(book: book),
                     label: {

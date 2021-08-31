@@ -100,7 +100,7 @@ struct CreateBookView: View {
                     .fontWeight(.bold)
             },
             trailing: Button(action: {
-                Book.createWith(title: title, links: links, in: viewContext)
+                Book.createWith(title: title, isbn: isbn, links: links, in: viewContext)
                 
                 self.presentationMode.wrappedValue
                     .dismiss()

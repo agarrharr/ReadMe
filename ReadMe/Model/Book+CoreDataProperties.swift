@@ -16,6 +16,7 @@ extension Book {
         return NSFetchRequest<Book>(entityName: "Book")
     }
 
+    @NSManaged public var id: UUID
     @NSManaged public var title: String
     @NSManaged public var isbn: String
     @NSManaged public var links: NSSet?
@@ -28,10 +29,12 @@ extension Book {
         }
     }
     
-    static func createWith(title: String, links: [Link], in context: NSManagedObjectContext) {
+    static func createWith(title: String, isbn: String, links: [Link], in context: NSManagedObjectContext) {
         let book = Book(context: context)
 
+        book.id = UUID()
         book.title = title
+        book.isbn = isbn
         book.links = NSSet(array: links)
 
         do {
@@ -40,20 +43,6 @@ extension Book {
             fatalError("Error saving book: \(error)")
         }
     }
-    
-//    static func createWith(title: String, isbn: String, links: [Link], in context: NSManagedObjectContext) {
-//        let book = Book(context: context)
-//
-//        book.title = title
-//        book.isbn = isbn
-//        book.links = NSSet(array: links)
-//
-//        do {
-//            try context.save()
-//        } catch {
-//            fatalError("Error saving book: \(error)")
-//        }
-//    }
     
     func add(link: Link, in context: NSManagedObjectContext) {
         link.id = UUID()

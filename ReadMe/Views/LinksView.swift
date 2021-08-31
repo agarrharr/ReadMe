@@ -90,7 +90,7 @@ struct LinksView: View {
     }
 }
 
-struct BookView_Previews: PreviewProvider {
+struct LinksView_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
