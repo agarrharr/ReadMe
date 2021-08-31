@@ -9,9 +9,10 @@ import CoreData
 import SwiftUI
 
 struct BookView: View {
-    @State var book: Book
-    @State var newLink: Link?
-    @State var isPresentingAddLinkSheet = false
+    var book: Book
+    
+    @State private var newLink: Link?
+    @State private var isPresentingAddLinkSheet = false
     
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
     

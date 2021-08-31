@@ -10,8 +10,8 @@ import SwiftUI
 struct LinkComposerActionOptionsView: View {
     var options: [Option]
     var action: Action
-    @EnvironmentObject private var linkComposer: LinkComposer
     
+    @EnvironmentObject private var linkComposer: LinkComposer
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     
     var body: some View {

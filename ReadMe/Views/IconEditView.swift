@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct IconEditView: View {
-    @State var tabSelection = 1
-    @State var temporarySystemName: String? = nil
     @Binding var systemName: String
-    @State var color: Color = Color(.red)
+    
+    @State private var tabSelection = 1
+    @State private var temporarySystemName: String? = nil
+    @State private var color: Color = Color(.red)
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     

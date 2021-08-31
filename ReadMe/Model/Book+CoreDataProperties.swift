@@ -41,19 +41,19 @@ extension Book {
         }
     }
     
-    static func createWith(title: String, isbn: String, links: [Link], in context: NSManagedObjectContext) {
-        let book = Book(context: context)
-
-        book.title = title
-        book.isbn = isbn
-        book.links = NSSet(array: links)
-
-        do {
-            try context.save()
-        } catch {
-            fatalError("Error saving book: \(error)")
-        }
-    }
+//    static func createWith(title: String, isbn: String, links: [Link], in context: NSManagedObjectContext) {
+//        let book = Book(context: context)
+//
+//        book.title = title
+//        book.isbn = isbn
+//        book.links = NSSet(array: links)
+//
+//        do {
+//            try context.save()
+//        } catch {
+//            fatalError("Error saving book: \(error)")
+//        }
+//    }
     
     func add(link: Link, in context: NSManagedObjectContext) {
         self.links = NSSet(array: self.linkArray + [link])
@@ -62,6 +62,16 @@ extension Book {
             try context.save()
         } catch {
             fatalError("Error saving book: \(error)")
+        }
+    }
+    
+    func delete(book: Book, in context: NSManagedObjectContext) {
+        context.delete(book)
+        
+        do {
+            try context.save()
+        } catch {
+            fatalError("Error deleting book: \(error)")
         }
     }
     

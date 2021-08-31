@@ -3,7 +3,7 @@
     <entity name="Book" representedClassName="Book" syncable="YES">
         <attribute name="isbn" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="links" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Link" inverseName="book" inverseEntity="Link"/>
+        <relationship name="links" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Link" inverseName="book" inverseEntity="Link"/>
     </entity>
     <entity name="Link" representedClassName="Link" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>

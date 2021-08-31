@@ -106,8 +106,8 @@ let apps: [App] = [
 
 struct LinkComposerView: View {
     @Binding var url: String
-    @EnvironmentObject private var linkComposer: LinkComposer
     
+    @EnvironmentObject private var linkComposer: LinkComposer
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {

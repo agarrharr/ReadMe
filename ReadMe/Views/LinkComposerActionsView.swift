@@ -10,8 +10,8 @@ import SwiftUI
 struct LinkComposerActionsView: View {
     var appName: String
     var actions: [Action]
-    @EnvironmentObject private var linkComposer: LinkComposer
     
+    @EnvironmentObject private var linkComposer: LinkComposer
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {

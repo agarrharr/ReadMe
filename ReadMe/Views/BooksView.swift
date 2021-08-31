@@ -5,11 +5,13 @@
 //  Created by Adam Garrett-Harris on 8/27/21.
 //
 
+import CoreData
 import SwiftUI
 
 struct BooksView: View {
-    @State var isPresentingAddBookSheet = false
+    @State private var isPresentingAddBookSheet = false
     
+    @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
     @FetchRequest(entity: Book.entity(), sortDescriptors: []) var books: FetchedResults<Book>
     
     var body: some View {
@@ -25,6 +27,7 @@ struct BooksView: View {
                         }
                     })
             }
+            .onDelete(perform: removeBooks)
         }
         .navigationBarTitle("Books")
         .navigationBarItems(
@@ -37,6 +40,18 @@ struct BooksView: View {
                 CreateBookView()
             }
         })
+    }
+    
+    func removeBooks(at offsets: IndexSet) {
+        for index in offsets {
+            let book = books[index]
+            viewContext.delete(book)
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            print("Failed to delete books: \(error)")
+        }
     }
 }
 

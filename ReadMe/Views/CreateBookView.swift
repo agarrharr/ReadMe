@@ -9,12 +9,12 @@ import CoreData
 import SwiftUI
 
 struct CreateBookView: View {
-    @State var title: String = ""
-    @State var isbn: String = ""
-    @State var isPresentingAddLinkSheet = false
-    @State var links: [Link] = []
-    @State var newLink: Link?
-    @State var isPresentingScanner = false
+    @State private var title: String = ""
+    @State private var isbn: String = ""
+    @State private var isPresentingAddLinkSheet = false
+    @State private var links: [Link] = []
+    @State private var newLink: Link?
+    @State private var isPresentingScanner = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext

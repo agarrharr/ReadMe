@@ -90,11 +90,12 @@
 		99D04940262DF34800241FAD /* ReadMe */ = {
 			isa = PBXGroup;
 			children = (
+				99D0494A262DF34A00241FAD /* Info.plist */,
 				99FA203C26DE8CF0006AD0D1 /* App */,
 				99FA203326DD595C006AD0D1 /* Resources */,
 				99FA203D26DE8DCE006AD0D1 /* Views */,
-				99FA203626DD6E0B006AD0D1 /* View Models */,
 				99E3E9B926D94C7900B13674 /* Model */,
+				99FA203626DD6E0B006AD0D1 /* View Models */,
 				99D04947262DF34A00241FAD /* Preview Content */,
 			);
 			path = ReadMe;
@@ -141,7 +142,6 @@
 		99FA203C26DE8CF0006AD0D1 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				99D0494A262DF34A00241FAD /* Info.plist */,
 				99E3E9B726D949DB00B13674 /* AppDelegate.swift */,
 				99E3E9BE26D94FDD00B13674 /* SceneDelegate.swift */,
 			);
