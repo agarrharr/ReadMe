@@ -40,15 +40,10 @@ let apps: [App] = [
                options: nil
         ),
         Action(labelName: "Open Collection",
-               actionName: "OpenCollection",
-               url: "lookupapp://?collection='{{$1}}'",
+               actionName: "Open Collection",
+               url: "lookupapp://?collection='{{$0}}'",
                description: nil,
                options: [
-                Option(name: "Name",
-                       placeholder: "Action Name",
-                       defaultText: "Open Collection",
-                       helpText: nil
-                ),
                 Option(name: "Collection",
                        placeholder: "Collection Name",
                        defaultText: "Found while reading",
@@ -57,14 +52,9 @@ let apps: [App] = [
         ),
         Action(labelName: "Search",
                actionName: "Search",
-               url: "lookupapp://?search={{$1}}",
+               url: "lookupapp://?search={{$0}}",
                description: nil,
                options: [
-                Option(name: "Name",
-                       placeholder: "Action Name",
-                       defaultText: "Search",
-                       helpText: nil
-                ),
                 Option(name: "Query",
                        placeholder: "",
                        defaultText: "[prompt:Query]",

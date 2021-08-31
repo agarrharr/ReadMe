@@ -17,10 +17,15 @@ struct LinkComposerActionOptionsView: View {
     var body: some View {
         List {
             Section {
+                HStack {
+                    Text("Name")
+                    Spacer(minLength: 14.0)
+                    TextField(action.actionName, text: $linkComposer.actionName)
+                }
                 ForEach(options.indices) { i in
                     HStack {
                         Text(options[i].name)
-                        Spacer()
+                        Spacer(minLength: 14.0)
                         TextField(options[i].placeholder, text: $linkComposer.optionValues[i])
                     }
                 }
@@ -43,11 +48,6 @@ struct LinkComposerActionOptionsView: View {
 struct LinkComposerActionOptionsView_Previews: PreviewProvider {
     static var previews: some View {
         let options = [
-            Option(name: "Name",
-                   placeholder: "Action Name",
-                   defaultText: "Open Collection",
-                   helpText: nil
-            ),
             Option(name: "Collection",
                    placeholder: "Collection Name",
                    defaultText: "Found while reading",
