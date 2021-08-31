@@ -74,7 +74,7 @@ struct BookView: View {
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button(action: { isPresentingAddLinkSheet = true }, label: {
-            Text("Add Link")
+            Text("Add Action")
         }))
     }
 }

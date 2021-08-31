@@ -52,7 +52,7 @@ struct CreateBookView: View {
                     }
                 }
                 
-                Section(header: Text("Links"), footer: Text("Links are an easy way to get to things related to this book. Don't worry, you can always add links later.")) {
+                Section(header: Text("Actions"), footer: Text("Actions help you do things related to this book like open the book, open a specific note, or start playing some music or background noise. Don't worry, you can always add actions later.")) {
                     ForEach(links, id: \.self) { link in
                         HStack {
                             Image(systemName: link.symbolName ?? "link")
@@ -63,7 +63,7 @@ struct CreateBookView: View {
                         isPresentingAddLinkSheet = true
                     } label: {
                         Label {
-                            Text("Add Link")
+                            Text("Add Action")
                                 .foregroundColor(.primary)
                         } icon: {
                             Image(systemName: "plus.circle.fill")

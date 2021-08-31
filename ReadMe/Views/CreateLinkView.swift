@@ -36,7 +36,7 @@ struct CreateLinkView: View {
                 }
                 
                 Section {
-                    Text("Link Composer")
+                    Text("Action Composer")
                         .foregroundColor(.blue)
                     .onTapGesture {
                         linkComposer.isPresenting = true
@@ -71,7 +71,7 @@ struct CreateLinkView: View {
                 }
             }
             .listStyle(GroupedListStyle())
-            .navigationBarTitle("Link")
+            .navigationBarTitle("Action")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
                 leading: Button(action: {
