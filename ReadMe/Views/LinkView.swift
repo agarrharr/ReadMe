@@ -42,9 +42,8 @@ struct LinkView: View {
         .padding(12)
         .background(Color(.systemPurple))
         .cornerRadius(20).onTapGesture {
-            if let url = URL(string: link.url ?? "") {
-                UIApplication.shared.open(url)
-            }
+            print(link.url ?? "")
+            UIApplication.shared.open(URLUtility.convertToURL(link.url ?? ""))
         }
     }
 }
