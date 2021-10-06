@@ -15,7 +15,6 @@ struct LinksView: View {
     @State private var isPresentingAddLinkSheet = false
     @State private var isDeletingLink: Link?
 
-    
     @Environment(\.managedObjectContext) var viewContext: NSManagedObjectContext
     
     let layout = [
@@ -54,9 +53,10 @@ struct LinksView: View {
         })
         .actionSheet(isPresented: Binding<Bool>(get: { isDeletingLink != nil }, set: { _ in })) {
             ActionSheet(title: Text("This action will be deleted"), buttons: [
-                .default(Text("Delete Action").foregroundColor(.red)) {
+                .default(Text("Delete Action")
+                            .foregroundColor(.red)) {
                                 deleteLink(link: isDeletingLink!)
-                    isDeletingLink = nil
+                                isDeletingLink = nil
                             }
             ])
         }

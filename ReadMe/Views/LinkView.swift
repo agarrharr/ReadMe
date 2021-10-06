@@ -41,7 +41,8 @@ struct LinkView: View {
         .frame(height: 90)
         .padding(12)
         .background(Color(.systemPurple))
-        .cornerRadius(20).onTapGesture {
+        .cornerRadius(10)
+        .onTapGesture {
             print(link.url ?? "")
             UIApplication.shared.open(URLUtility.convertToURL(link.url ?? ""))
         }
